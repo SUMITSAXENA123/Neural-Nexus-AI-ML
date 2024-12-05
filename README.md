@@ -118,8 +118,8 @@ Neural-Nexus-AI-ML/
 └── requirements.txt           # Dependencies
 ```
 ##  Contributors
--   Kailash Maurya
--   Email: kailashmaurya51@gmail.com
+-   Sumit Saxena
+-   Email: sumitsaxenah806@gmail.com
 
 ## License
 This project is licensed under the MIT License. See the LICENSE file for more details.
