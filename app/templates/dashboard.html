@@ -1,0 +1,92 @@
+{% extends "index.html" %}
+
+{% block content %}
+<div class="dashboard">
+    <!-- Search Section -->
+    <section class="search-section mb-4">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-8">
+                        <input type="text" id="search-input" class="form-control" 
+                               placeholder="Search by Customer ID or Country">
+                    </div>
+                    <div class="col-md-4">
+                        <button class="btn btn-primary w-100" onclick="searchTransactions()">
+                            Search
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Metrics Section -->
+    <section class="metrics-section mb-4">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="metric-card">
+                    <h3>Total Transactions</h3>
+                    <p id="total-transactions">Loading...</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="metric-card">
+                    <h3>Total Amount</h3>
+                    <p id="total-amount">Loading...</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="metric-card">
+                    <h3>Fraud Rate</h3>
+                    <p id="fraud-rate">Loading...</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="metric-card">
+                    <h3>Risk Score</h3>
+                    <p id="risk-score">Loading...</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Charts Section -->
+    <section class="charts-section">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Transaction Trends</h5>
+                        <div id="trends-chart"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Geographic Distribution</h5>
+                        <div id="map-chart"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Power BI Section -->
+    <section class="powerbi-section mt-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Advanced Analytics</h5>
+                <div id="powerbi-container"></div>
+            </div>
+        </div>
+    </section>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<script src="https://microsoft.github.io/PowerBI-JavaScript/demo/node_modules/powerbi-client/dist/powerbi.min.js"></script>
+<script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,257 @@
+{% extends "base.html" %}
+
+{% block content %}
+<main class="dashboard-container">
+    <!-- Your existing index.html content here, without the header/footer parts -->
+    <!-- Metrics Section -->
+    <section class="metrics-section mb-4">
+        <div class="row g-3">
+            <div class="col-md-3">
+                <div class="metric-card">
+                    <h3>Total Transactions</h3>
+                    <p id="total-transactions" class="metric-value">{{ total_transactions }}</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="metric-card">
+                    <h3>Fraud Detected</h3>
+                    <p id="total-fraud" class="metric-value">{{ total_fraud }}</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="metric-card">
+                    <h3>Fraud Rate</h3>
+                    <p id="fraud-rate" class="metric-value">{{ fraud_rate }}%</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="metric-card">
+                    <h3>Year</h3>
+                    <p id="total-amount" class="metric-value">2009 - 2010</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Alert & Anomaly Section -->
+    <section class="alert-anomaly-section mb-4">
+        <div class="row">
+            <!-- Alert Section -->
+            <div class="col-md-6">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h5 class="card-title mb-0">High Risk Alert</h5>
+                            <span class="badge bg-danger" id="alert-count">Count 1</span>
+                        </div>
+                        <div class="alert-container">
+                            <div class="high-risk-customer">
+                                <h6>Highest Risk Customer</h6>
+                                <div class="customer-details" id="high-risk-details">
+                                    <div class="detail-row">
+                                        <span class="label">Customer ID:</span>
+                                        <span class="value" id="risk-customer-id">Loading...</span>
+                                    </div>
+                                    <div class="detail-row">
+                                        <span class="label">Country:</span>
+                                        <span class="value" id="risk-country">Loading...</span>
+                                    </div>
+                                    <div class="detail-row">
+                                        <span class="label">Total Transactions:</span>
+                                        <span class="value" id="risk-transactions">Loading...</span>
+                                    </div>
+                                    <div class="detail-row">
+                                        <span class="label">Risk Score:</span>
+                                        <span class="value" id="risk-score">Loading...</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="recent-alerts mt-3">
+                                <h6>Recent Alerts</h6>
+                                <div class="alert-list" id="recent-alerts">
+                                    <!-- Populated by JavaScript -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Anomaly Section -->
+            <div class="col-md-6">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">Anomaly Insights</h5>
+                        <div class="anomaly-metrics">
+                            <div class="row g-3">
+                                <div class="col-6">
+                                    <div class="anomaly-metric-card">
+                                        <h6>Anomaly Rate</h6>
+                                        <p id="anomaly-rate" class="anomaly-value">Loading...</p>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="anomaly-metric-card">
+                                        <h6>Total Anomalies</h6>
+                                        <p id="total-anomalies" class="anomaly-value">Loading...</p>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="anomaly-metric-card">
+                                        <h6>Amount at Risk</h6>
+                                        <p id="amount-at-risk" class="anomaly-value">Loading...</p>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="anomaly-metric-card">
+                                        <h6>Countries Affected</h6>
+                                        <p id="countries-affected" class="anomaly-value">Loading...</p>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <h6>Last 24 Hours</h6>
+                                    <div class="row g-2">
+                                        <div class="col-4">
+                                            <div class="anomaly-metric-card">
+                                                <small>Transactions</small>
+                                                <p id="transactions-24h" class="anomaly-value small">Loading...</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="anomaly-metric-card">
+                                                <small>Anomalies</small>
+                                                <p id="anomalies-24h" class="anomaly-value small">Loading...</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="anomaly-metric-card">
+                                                <small>Amount</small>
+                                                <p id="amount-24h" class="anomaly-value small">Loading...</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Filters Section -->
+    <section class="filters-section mb-4">
+        <div class="card">
+            <div class="card-body">
+                <div class="row g-3">
+                    <div class="col-md-4">
+                        <label class="form-label">
+                            <i class="fas fa-globe me-2"></i>Country
+                        </label>
+                        <select id="country-filter" class="form-select">
+                            <option value="">All Countries</option>
+                            <!-- Populated dynamically via JavaScript -->
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">
+                            <i class="fas fa-calendar me-2"></i>Date Range
+                        </label>
+                        <div class="input-group">
+                            <select class="form-select" id="date-range-type" style="max-width: 150px;">
+                                <option value="week">Weekly</option>
+                                <option value="month">Monthly</option>
+                                <option value="year">Yearly</option>
+                                <option value="custom">Custom</option>
+                            </select>
+                            <input type="text" id="date-range" class="form-control" placeholder="Select date range" readonly>
+                            <button class="btn btn-outline-secondary" type="button" id="reset-dates">
+                                <i class="fas fa-redo-alt"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">
+                            <i class="fas fa-user me-2"></i>Customer ID
+                        </label>
+                        <select id="customer-filter" class="form-select" data-live-search="true">
+                            <option value="">All Customers</option>
+                            <option value="17850">17850</option>
+                            <option value="13047">13047</option>
+                            <option value="12583">12583</option>
+                            <option value="13748">13748</option>
+                            <option value="15100">15100</option>
+                            <option value="15291">15291</option>
+                            <option value="14688">14688</option>
+                            <option value="17809">17809</option>
+                            <option value="15311">15311</option>
+                            <option value="14527">14527</option>
+                            <option value="16098">16098</option>
+                            <option value="18074">18074</option>
+                            <option value="17420">17420</option>
+                            <option value="16029">16029</option>
+                            <option value="16250">16250</option>
+                            <option value="12431">12431</option>
+                            <option value="17511">17511</option>
+                            <option value="17548">17548</option>
+                            <option value="13705">13705</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="mt-3 text-end">
+                    <button id="apply-filters" class="btn btn-primary">
+                        <i class="fas fa-filter me-2"></i>Apply Filters
+                    </button>
+                    <button id="reset-filters" class="btn btn-outline-secondary ms-2">
+                        <i class="fas fa-undo me-2"></i>Reset
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- Charts Section -->
+    <section class="charts-section">
+        <div class="row g-4">
+            <div class="col-md-6">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">Fraud by Country</h5>
+                        <div id="fraud-by-country" class="chart-container"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">Transaction Timeline</h5>
+                        <div id="transactions-over-time" class="chart-container"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">Amount Distribution</h5>
+                        <div id="amount-distribution" class="chart-container"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">Top Fraud Categories</h5>
+                        <div id="fraud-categories" class="chart-container"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+{% endblock %} 

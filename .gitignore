@@ -1,0 +1,20 @@
+venv/
+.ipynb_checkpoints/
+*.pyc
+*.pyo
+__pycache__/
+
+# Set default behavior to automatically normalize line endings.
+* text=auto
+
+# Explicitly declare text files you want to always be normalized and converted
+# to native line endings on checkout.
+*.py text
+*.html text
+*.js text
+
+# Ignore Neural-Nexus-AI-ML folder
+Neural-Nexus-AI-ML/
+git add .gitignore
+git commit -m "Ignore Neural-Nexus-AI-ML folder"
+git push origin master
